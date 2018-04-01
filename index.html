@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="style.css" type="text/css">
+  <title>Where's my money gone?</title>
+</head>
+<body>
+  <header>
+   <h1>where's my money gone?</h1>
+   <section>
+     <h2>budget for <span class="month">month</span></h2>
+     <h2>£<span class="currentBudget">0</span></h2>
+   </section>
+   <form action="">
+     <label for="income">income</label>
+     <input type="radio" name="budgetType" id="income" value="income">
+     <label for="outgoings">outgoings</label>
+     <input type="radio" name="budgetType" id="outgoings" value="outgoings">
+     <input type="text" placeholder="description">
+     <input type="text" placeholder="000" pattern="[0-9]" required="0-9 only please">
+
+   </form>
+  </header>
+  <main>
+    <ul class="income">
+      <li class="heading income">income</li>
+    </ul>
+    <ul class="outgoings">
+      <li class="heading outgoings">outgoings</li>
+    </ul>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
