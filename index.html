@@ -10,9 +10,9 @@
 <body>
   <header>
    <h1>where's my money gone?</h1>
-   <section>
-     <h2>budget for <span class="month">month</span></h2>
-     <h2>£<span class="currentBudget">0</span></h2>
+   <section class="current">
+     <h2>budget for <span class="currentMonth">month</span></h2>
+     <h2>£<span class="currentMoney">0</span></h2>
    </section>
    <form action="">
      <label for="income">income</label>
@@ -21,7 +21,6 @@
      <input type="radio" name="budgetType" id="outgoings" value="outgoings">
      <input type="text" placeholder="description">
      <input type="text" placeholder="000" pattern="[0-9]" required="0-9 only please">
-
    </form>
   </header>
   <main>
