@@ -11,24 +11,26 @@
   <header>
    <h1>where's my money gone?</h1>
    <section class="current">
-     <h2>budget for <span class="currentMonth">month</span></h2>
-     <h2>£<span class="currentMoney">0</span></h2>
+     <h2>budget for <span class="currentMonth">%month%</span> <span class="currentTotal">£%0%</span></h2>
+     <p class="income">income <span class="currentIncome">£%0%</span></p>
+     <p class="expenses">expenses <span class="currentExpenses">£%0%</span></p>
    </section>
-   <form action="">
-     <label for="income">income</label>
-     <input type="radio" name="budgetType" id="income" value="income">
-     <label for="outgoings">outgoings</label>
-     <input type="radio" name="budgetType" id="outgoings" value="outgoings">
-     <input type="text" placeholder="description">
-     <input type="text" placeholder="000" pattern="[0-9]" required="0-9 only please">
-   </form>
+   <section class="inputItem">
+     <select name="budgetType" class="addType">
+       <option value="inc">income</option>
+       <option value="exp">expense</option>
+     </select>
+    <input type="text" class="addDescription" placeholder="description" required>
+     <input type="number" class="addValue" placeholder="value" pattern="[0-9]" required>
+     <button class="addItem">go!</button>
+    </section>
   </header>
   <main>
     <ul class="income">
       <li class="heading income">income</li>
     </ul>
-    <ul class="outgoings">
-      <li class="heading outgoings">outgoings</li>
+    <ul class="expense">
+      <li class="heading expense">expenses</li>
     </ul>
   </main>
 
