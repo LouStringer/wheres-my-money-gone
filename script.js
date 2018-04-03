@@ -24,30 +24,38 @@ const budgetController = (() => {
     this.value = value;
   }
 
-  const updateBudget = (type, description, value) => {
+  const createBudgetItem = (type, description, value) => {
     let newItem, ID;
     // set ID
     if (budgetData.items[type].length > 0) {
       ID = budgetData.items[type][budgetData.items[type].length - 1].id + 1
     } else {ID = 0};
-    // create new budget item & update totals
+    // create new budget item
     if (type === "inc") {
       newItem = new Income(ID, description, value);
-      budgetData.totals.income += value;
     } else {
       newItem = new Expense(ID, description, value);
-      budgetData.totals.expenses -= value;
     }
+    // push to budgetData object
     budgetData.items[type].push(newItem);
-    budgetData.totals.total = budgetData.totals.income + budgetData.totals.expenses;
     return {
       newItem,
     }
   }
 
+  const updateTotals = (type, value) => {
+    if (type === "inc") {
+      budgetData.totals.income += value;
+    } else {
+      budgetData.totals.expenses -= value;
+    }
+    budgetData.totals.total = budgetData.totals.income + budgetData.totals.expenses;
+  }
+
   return {
     budgetData,
-    updateBudget,
+    createBudgetItem,
+    updateTotals
   }
 })();
 
@@ -76,11 +84,11 @@ const uiController = (() => {
     return {
       type: document.querySelector(DOMStrings.addType).value,
       description: document.querySelector(DOMStrings.addDescription).value,
-      value: parseInt(document.querySelector(DOMStrings.addValue).value),
+      value: parseFloat(document.querySelector(DOMStrings.addValue).value),
     }
   }
 
-  const updateBudget = (total, income, expenses) => {
+  const updateBudgetUI = (total, income, expenses) => {
     document.querySelector(DOMStrings.total).innerText = `£${total}`;
     document.querySelector(DOMStrings.income).innerText = `£${income}`;
     document.querySelector(DOMStrings.expenses).innerText = `£${expenses}`;
@@ -99,43 +107,64 @@ const uiController = (() => {
     }
   }
 
+  const clearFields = () => {
+    let fieldsArray = Array.from(document.querySelectorAll("input"));
+    for (field of fieldsArray) {
+       field.value = "";
+    }
+    fieldsArray[0].focus();
+  }
+
   return {
     DOMStrings,
     getMonth,
     getInput,
-    updateBudget,
+    updateBudgetUI,
     addListItem,
+    clearFields,
   }
 })();
 
 //////////
 const controller = ((budgetCtrl, uiCtrl) => {
-  let input, newItem, budget;
+  let input, newItem;
 
   const setUpEventListeners = () => {
     const addItemButton = document.querySelector(".addItem");
     addItemButton.addEventListener("click", addItem);
   }
 
-  const addItem = () => {
-    // get info from from inputs
-    input = uiCtrl.getInput();
-    // create new item & add amount to budget
-    newItem = budgetCtrl.updateBudget(input.type, input.description, input.value);
+  const updateBudget = () => {
+    // calculate new budget totals
+    budgetCtrl.updateTotals(input.type, input.value);
     // update budget in UI:
-    uiCtrl.updateBudget(budgetCtrl.budgetData.totals.total, budgetCtrl.budgetData.totals.income, budgetCtrl.budgetData.totals.expenses);
-    // add item to relevant UL
-    uiCtrl.addListItem(input.type, input.description, input.value);
+    uiCtrl.updateBudgetUI(budgetCtrl.budgetData.totals.total, budgetCtrl.budgetData.totals.income, budgetCtrl.budgetData.totals.expenses);
+  }
+
+  const addItem = () => {
+    // check if valid input
+    if (document.querySelector(uiCtrl.DOMStrings.addDescription).value !== "" && !isNaN(document.querySelector(uiCtrl.DOMStrings.addValue).value) && document.querySelector(uiCtrl.DOMStrings.addValue).value > 0) {
+      // get info from from inputs
+      input = uiCtrl.getInput();
+      // create new item
+      newItem = budgetCtrl.createBudgetItem(input.type, input.description, input.value);
+      // add item to relevant UL
+      uiCtrl.addListItem(input.type, input.description, input.value);
+      // clear input fields
+      uiCtrl.clearFields();
+      // update budget totals (also in UI)
+      updateBudget();
+    }
   }
 
   const init = () => {
     uiCtrl.getMonth();
+    uiCtrl.clearFields();
     setUpEventListeners();
   }
 
   return {
     init,
-    budget
   }
 
 
