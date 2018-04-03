@@ -11,26 +11,28 @@
   <header>
    <h1>where's my money gone?</h1>
    <section class="current">
-     <h2>budget for <span class="currentMonth">%month%</span> <span class="currentTotal">£%0%</span></h2>
-     <p class="income">income <span class="currentIncome">£%0%</span></p>
-     <p class="expenses">expenses <span class="currentExpenses">£%0%</span></p>
+     <p class="total">budget for <span class="currentMonth">%month%</span><br /><span class="currentTotal">£0</span></p>
+     <p class="income">income <span class="currentIncome">£0</span></p>
+     <p class="expenses">expenses <span class="currentExpenses">£0</span></p>
    </section>
    <section class="inputItem">
-     <select name="budgetType" class="addType">
+    <select name="budgetType" class="addType">
        <option value="inc">income</option>
        <option value="exp">expense</option>
-     </select>
+    </select>
     <input type="text" class="addDescription" placeholder="description" required>
-     <input type="number" class="addValue" placeholder="value" pattern="[0-9]" required>
-     <button class="addItem">go!</button>
-    </section>
+    <input type="number" class="addValue" placeholder="value" pattern="[0-9]" required>
+    <button class="addItem">go!</button>
+  </section>
   </header>
   <main>
     <ul class="income">
       <li class="heading income">income</li>
+      <!-- <li class="item %incexp%"><span>%description%</span><span>%value%</span></li> -->
     </ul>
     <ul class="expense">
       <li class="heading expense">expenses</li>
+      <!-- <li class="item %incexp%"><span>%description%</span><span>%value%</span></li> -->
     </ul>
   </main>
 

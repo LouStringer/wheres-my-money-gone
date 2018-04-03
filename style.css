@@ -7,7 +7,7 @@
 }
 
 @font-face {
-  font-family: 'Neucha';
+  font-family: "Neucha";
   font-style: normal;
   font-weight: 400;
   src: local('Neucha'), url(https://fonts.gstatic.com/s/neucha/v9/q5uGsou0JOdh94bfvQltKRZUgQ.woff2) format('woff2');
@@ -43,13 +43,13 @@ header > * {
 }
 
 header h1 {
-  font-family: "Neucha";
+  font-family: "Neucha", "Open Sans";
   font-size: 3.5em;
   letter-spacing: 0.03em;
   text-shadow: 2px 2px 3px #efefef;
 }
 
-p.income, p.expenses {
+p.total, p.income, p.expenses {
   width: 300px;
   height: 30px;
   margin: 10px;
@@ -57,6 +57,19 @@ p.income, p.expenses {
   padding: 0 10px;
   line-height: 30px;
   text-align: left;
+}
+
+p.total {
+  height: 70px;
+  padding: 20px 10px;
+  background-color: #fff;
+  font-size: 2em;
+  line-height: 1.2;
+  text-align: center;
+}
+
+span.currentMonth, span.currentTotal {
+  font-size: 1em;
 }
 
 p.income {
@@ -79,23 +92,23 @@ p>span {
 section.inputItem>* {
   margin: 0 2.5px;
 }
-/*
-input {
-  border-radius: 3px;
-} */
+
+section>.addValue {
+  width: 75px;
+}
 
 button {
   width: 50px;
   height: 30px;
-  border: 3px solid #ACB6E5;
+  border: 3px solid #A4A8D1;
   border-radius: 5px;
   background: #fff;
-  color: #ACB6E5;
+  color: #A4A8D1;
 }
 
 button:hover, button:focus {
   border: 3px solid #fff;
-  background: #ACB6E5;
+  background: #A4A8D1;
   color: #fff;
 }
 
@@ -116,7 +129,15 @@ li {
 }
 
 li.heading {
-  border-bottom: 2px solid #ACB6E5;
   padding: 5px;
   text-align: center;
+  letter-spacing: 0.1em;
+}
+
+li.heading.income {
+  border-bottom: 2px solid #ACB6E5;
+}
+
+li.heading.expense {
+  border-bottom: 2px solid #ED6A5A;
 }
