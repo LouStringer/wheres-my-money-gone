@@ -95,7 +95,7 @@ const uiController = (() => {
   }
 
   const addListItem = (type, description, value) => {
-    let html = '<li class="item %incexp%"><span>%description%</span><span>%value%</span></li>'
+    let html = '<li class="item %incexp%"><span>%description%</span><span class="value">£%value%</span><span class="delete hide">x</span></li>'
     html = html.replace("%description%", description);
     html = html.replace("%value%", value);
     if (type === "inc") {

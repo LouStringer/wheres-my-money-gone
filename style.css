@@ -26,6 +26,10 @@
   outline: none;
 }
 
+.hide {
+  display: none;
+}
+
 header {
   display: flex;
   flex-direction: column;
@@ -33,7 +37,7 @@ header {
   align-items: center;
   padding: 15px;
   background: #74ebd5;  /* fallback for old browsers */
-  background: linear-gradient(to top, #74ebd555, #74ebd5);
+  background: linear-gradient(to top, #74ebd555, #74ebd5cc);
   color: #404040;
   text-align: center;
 }
@@ -50,6 +54,7 @@ header h1 {
 }
 
 p.total, p.income, p.expenses {
+  display: flex;
   width: 300px;
   height: 30px;
   margin: 10px;
@@ -60,12 +65,14 @@ p.total, p.income, p.expenses {
 }
 
 p.total {
+  /* flex-direction: column; */
+  /* justify-content: ; */
   height: 70px;
   padding: 20px 10px;
   background-color: #fff;
   font-size: 2em;
   line-height: 1.2;
-  text-align: center;
+  /* text-align: center; */
 }
 
 span.currentMonth, span.currentTotal {
@@ -82,11 +89,9 @@ p.expenses {
   background-color: #ED6A5Add;
 }
 
-p>span {
-  display: inline-block;
+span.currentIncome, span.currentExpenses {
   width: 50px;
   margin-left: auto;
-  text-align: center;
 }
 
 section.inputItem>* {
@@ -140,4 +145,22 @@ li.heading.income {
 
 li.heading.expense {
   border-bottom: 2px solid #ED6A5A;
+}
+
+li {
+  display: flex;
+  justify-content: flex-start;
+  padding: 5px;
+}
+
+li.income:nth-child(even) {
+  background: #ACB6E533;
+}
+
+li.expense:nth-child(even) {
+  background: #ED6A5A22;
+}
+
+span.value {
+  margin-left: auto;
 }

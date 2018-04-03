@@ -11,7 +11,7 @@
   <header>
    <h1>where's my money gone?</h1>
    <section class="current">
-     <p class="total">budget for <span class="currentMonth">%month%</span><br /><span class="currentTotal">£0</span></p>
+     <p class="total">budget for <span class="currentMonth"> %month%</span><span class="currentTotal"> £0</span></p>
      <p class="income">income <span class="currentIncome">£0</span></p>
      <p class="expenses">expenses <span class="currentExpenses">£0</span></p>
    </section>
@@ -28,11 +28,14 @@
   <main>
     <ul class="income">
       <li class="heading income">income</li>
-      <!-- <li class="item %incexp%"><span>%description%</span><span>%value%</span></li> -->
+      <!-- <li class="item %incexp%"><span>%description%</span><span class="value">£%value%</span><span class="delete hide">x</span></li> -->
+      <li class="item income"><span>%description%</span><span class="value">£%value%</span><span class="delete hide">x</span></li>
+      <li class="item income"><span>%description%</span><span class="value">£%value%</span><span class="delete hide">x</span></li>
+      <li class="item income"><span>%description%</span><span class="value">£%value%</span><span class="delete hide">x</span></li>
     </ul>
     <ul class="expense">
       <li class="heading expense">expenses</li>
-      <!-- <li class="item %incexp%"><span>%description%</span><span>%value%</span></li> -->
+      <!-- <li class="item %incexp%"><span>%description%</span><span class="value">£%value%</span><span class="delete hide">x</span></li> -->
     </ul>
   </main>
 
