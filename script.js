@@ -31,11 +31,7 @@ const budgetController = (() => {
       ID = budgetData.items[type][budgetData.items[type].length - 1].id + 1
     } else {ID = 0};
     // create new budget item
-    if (type === "inc") {
-      newItem = new Income(ID, description, value);
-    } else {
-      newItem = new Expense(ID, description, value);
-    }
+    type === "inc" ? newItem = new Income(ID, description, value) : newItem = new Expense(ID, description, value);
     // push to budgetData object
     budgetData.items[type].push(newItem);
     return {
@@ -43,7 +39,7 @@ const budgetController = (() => {
     }
   }
 
-  const updateTotals = (type, value) => {
+  const calculateBudget = (type, value) => {
     if (type === "inc") {
       budgetData.totals.income += value;
     } else {
@@ -55,7 +51,7 @@ const budgetController = (() => {
   return {
     budgetData,
     createBudgetItem,
-    updateTotals
+    calculateBudget,
   }
 })();
 
@@ -95,7 +91,7 @@ const uiController = (() => {
   }
 
   const addListItem = (type, description, value) => {
-    let html = '<li class="item %incexp%"><span>%description%</span><span class="value">£%value%</span><span class="delete hide">x</span></li>'
+    let html = '<li class="item %incexp%"><span>%description%</span><span class="value">£%value%</span><span class="delete">x</span></li>'
     html = html.replace("%description%", description);
     html = html.replace("%value%", value);
     if (type === "inc") {
@@ -136,7 +132,7 @@ const controller = ((budgetCtrl, uiCtrl) => {
 
   const updateBudget = () => {
     // calculate new budget totals
-    budgetCtrl.updateTotals(input.type, input.value);
+    budgetCtrl.calculateBudget(input.type, input.value);
     // update budget in UI:
     uiCtrl.updateBudgetUI(budgetCtrl.budgetData.totals.total, budgetCtrl.budgetData.totals.income, budgetCtrl.budgetData.totals.expenses);
   }
@@ -150,10 +146,10 @@ const controller = ((budgetCtrl, uiCtrl) => {
       newItem = budgetCtrl.createBudgetItem(input.type, input.description, input.value);
       // add item to relevant UL
       uiCtrl.addListItem(input.type, input.description, input.value);
-      // clear input fields
-      uiCtrl.clearFields();
       // update budget totals (also in UI)
       updateBudget();
+      // clear input fields
+      uiCtrl.clearFields();
     }
   }
 

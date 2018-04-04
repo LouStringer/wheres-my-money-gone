@@ -26,10 +26,6 @@
   outline: none;
 }
 
-.hide {
-  display: none;
-}
-
 header {
   display: flex;
   flex-direction: column;
@@ -119,9 +115,8 @@ button:hover, button:focus {
 
 main {
   display: flex;
-  /* flex-direction: column; */
   justify-content: center;
-  /* align-items: center; */
+  flex-wrap: wrap;
 }
 
 ul {
@@ -150,17 +145,52 @@ li.heading.expense {
 li {
   display: flex;
   justify-content: flex-start;
+  align-items: center;
   padding: 5px;
 }
 
-li.income:nth-child(even) {
-  background: #ACB6E533;
+li.income:nth-child(2n+3) {
+  background: #ACB6E522;
 }
 
-li.expense:nth-child(even) {
+li.expense:nth-child(2n+3) {
   background: #ED6A5A22;
 }
 
 span.value {
   margin-left: auto;
+}
+
+.item .delete {
+  width: 0px;
+  overflow: hidden;
+  margin-left: 10px;
+  border-radius: 35px;
+  font-family: "Neucha";
+  font-size: 1.5em;
+  font-weight: bold;
+  text-align: center;
+  transition: 0.25s
+}
+
+.item.income .delete {
+  border: 2px solid #ACB6E5;
+  color: #ACB6E5;
+}
+
+.item.expense .delete {
+  border: 2px solid #ED6A5A;
+  color: #ED6A5A;
+}
+
+li.item:nth-child(2n+2) .delete {
+  background: #efefef99;
+}
+
+li.item:nth-child(2n+3) .delete {
+  background: #fff;
+}
+
+.item:hover .delete {
+  width: 40px;
 }
