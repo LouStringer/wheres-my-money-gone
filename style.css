@@ -7,7 +7,7 @@
 }
 
 @font-face {
-  font-family: "Neucha";
+  font-family: 'Neucha';
   font-style: normal;
   font-weight: 400;
   src: local('Neucha'), url(https://fonts.gstatic.com/s/neucha/v9/q5uGsou0JOdh94bfvQltKRZUgQ.woff2) format('woff2');
@@ -31,15 +31,11 @@ header {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 15px;
-  background: #74ebd5;  /* fallback for old browsers */
-  background: linear-gradient(to top, #74ebd555, #74ebd5cc);
+  padding: 25px;
+  background-image: url("gplay.png");
+  background-repeat: repeat;
   color: #404040;
   text-align: center;
-}
-
-header > * {
-  margin: 10px;
 }
 
 header h1 {
@@ -47,6 +43,14 @@ header h1 {
   font-size: 3.5em;
   letter-spacing: 0.03em;
   text-shadow: 2px 2px 3px #efefef;
+}
+
+section.current {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
 p.total, p.income, p.expenses {
@@ -61,28 +65,32 @@ p.total, p.income, p.expenses {
 }
 
 p.total {
-  /* flex-direction: column; */
-  /* justify-content: ; */
-  height: 70px;
-  padding: 20px 10px;
-  background-color: #fff;
+  justify-content: center;
+  width: 100%;
+  margin: 20px;
   font-size: 2em;
-  line-height: 1.2;
-  /* text-align: center; */
 }
 
 span.currentMonth, span.currentTotal {
   font-size: 1em;
+  padding: 0 5px;
+}
+
+div.totalContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 p.income {
   border: 1px solid #A4A8D1;
-  background-color: #A4A8D1dd;
+  background: #A4A8D199;
 }
 
 p.expenses {
   border: 1px solid #ED6A5A;
-  background-color: #ED6A5Add;
+  background: #ED6A5A99;
 }
 
 span.currentIncome, span.currentExpenses {
@@ -90,8 +98,22 @@ span.currentIncome, span.currentExpenses {
   margin-left: auto;
 }
 
+section.inputItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  min-height: 50px;
+  border-top: 1px solid #74ebd5;
+  border-bottom: 1px solid #74ebd5;
+  /* background: #74ebd5;
+  background: linear-gradient(to top, #74ebd555, #74ebd5cc); */
+  background: #74ebd555;
+}
+
 section.inputItem>* {
-  margin: 0 2.5px;
+  margin: 5px 2.5px;
 }
 
 section>.addValue {
