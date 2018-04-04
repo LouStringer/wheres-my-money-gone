@@ -60,6 +60,7 @@ p.total, p.income, p.expenses {
   margin: 10px;
   border-radius: 5px;
   padding: 0 10px;
+  font-size: 1.25em;
   line-height: 30px;
   text-align: left;
 }
@@ -120,7 +121,7 @@ section>.addValue {
   width: 75px;
 }
 
-button {
+section.inputItem>button {
   width: 50px;
   height: 30px;
   border: 3px solid #A4A8D1;
@@ -129,7 +130,7 @@ button {
   color: #A4A8D1;
 }
 
-button:hover, button:focus {
+section.inputItem>button:hover, section.inputItem>button:focus {
   border: 3px solid #fff;
   background: #A4A8D1;
   color: #fff;
@@ -200,13 +201,25 @@ span.value {
   color: #ACB6E5;
 }
 
+.item.income .delete:hover, .item.income .delete:focus {
+  border: 2px solid #efefef;
+  background: #ACB6E5;
+  color: #fff;
+}
+
 .item.expense .delete {
   border: 2px solid #ED6A5A;
   color: #ED6A5A;
 }
 
+.item.expense .delete:hover, .item.expense .delete:focus {
+  border: 2px solid #efefef;
+  background: #ED6A5A;
+  color: #fff;
+}
+
 li.item:nth-child(2n+2) .delete {
-  background: #efefef99;
+  background: #efefefbb;
 }
 
 li.item:nth-child(2n+3) .delete {
