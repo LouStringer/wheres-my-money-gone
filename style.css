@@ -54,7 +54,7 @@ section.current {
 }
 
 p.total, p.income, p.expenses {
-  display: flex;
+  /* display: flex; */
   width: 300px;
   height: 30px;
   margin: 10px;
@@ -66,10 +66,11 @@ p.total, p.income, p.expenses {
 }
 
 p.total {
-  justify-content: center;
+  /* justify-content: center; */
   width: 100%;
   margin: 20px;
   font-size: 2em;
+  text-align: center;
 }
 
 span.currentMonth, span.currentTotal {
@@ -82,6 +83,10 @@ div.totalContainer {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+}
+
+p.income, p.expenses {
+  display: flex;
 }
 
 p.income {
