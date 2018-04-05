@@ -24,7 +24,7 @@ const budgetController = (() => {
     this.value = value;
   }
 
-  const createBudgetItem = (type, description, value) => {
+  const createBudgetItemData = (type, description, value) => {
     let newItem, ID;
     // set ID
     if (budgetData.items[type].length > 0) {
@@ -39,6 +39,13 @@ const budgetController = (() => {
     }
   }
 
+  const deleteBudgetItemData = (type, id) => {
+    const index = budgetData.items[type].findIndex(item => {
+      item.id === id;
+    })
+    budgetData.items[type].splice(index, 1);
+  }
+
   const calculateBudget = () => {
     budgetData.totals.income = budgetData.items.inc.reduce((total, item) => {
       return total + item.value;
@@ -51,7 +58,8 @@ const budgetController = (() => {
 
   return {
     budgetData,
-    createBudgetItem,
+    createBudgetItemData,
+    deleteBudgetItemData,
     calculateBudget,
   }
 })();
@@ -107,6 +115,10 @@ const uiController = (() => {
     }
   }
 
+  const deleteListItem = (id) => {
+    document.querySelector(`#${id}`).remove();
+  }
+
   const clearFields = () => {
     let fieldsArray = Array.from(document.querySelectorAll("input"));
     for (field of fieldsArray) {
@@ -121,6 +133,7 @@ const uiController = (() => {
     getInput,
     updateBudgetUI,
     addListItem,
+    deleteListItem,
     clearFields,
   }
 })();
@@ -149,7 +162,7 @@ const controller = ((budgetCtrl, uiCtrl) => {
       // get info from from inputs
       input = uiCtrl.getInput();
       // create new item
-      newItem = budgetCtrl.createBudgetItem(input.type, input.description, input.value);
+      newItem = budgetCtrl.createBudgetItemData(input.type, input.description, input.value);
       // add item to relevant UL
       uiCtrl.addListItem(newItem.newItem, input.type);
       // update budget totals (also in UI)
@@ -160,18 +173,15 @@ const controller = ((budgetCtrl, uiCtrl) => {
   }
 
   const deleteItem = (event) => {
-    let id, idType, idNumber, index;
+    let id, idType, idNumber;
     if (event.target.tagName === "BUTTON") {
       id = event.target.parentNode.id;
       idType = id.slice(0,3);
       idNumber = parseInt(id.match(/[0-9]/gi));
-      index = budgetCtrl.budgetData.items[idType].findIndex(item => {
-        item.id === idNumber;
-      })
-      budgetCtrl.budgetData.items[idType].splice(index, 1);
-      document.querySelector(`#${id}`).remove();
+      budgetCtrl.deleteBudgetItemData(idType, idNumber);
+      uiCtrl.deleteListItem(id);
+      updateBudget();
     }
-    updateBudget();
   }
 
   const init = () => {
