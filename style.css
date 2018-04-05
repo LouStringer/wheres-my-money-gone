@@ -54,9 +54,8 @@ section.current {
 }
 
 p.total, p.income, p.expenses {
-  /* display: flex; */
   width: 300px;
-  height: 30px;
+  min-height: 30px;
   margin: 10px;
   border-radius: 5px;
   padding: 0 10px;
@@ -66,7 +65,6 @@ p.total, p.income, p.expenses {
 }
 
 p.total {
-  /* justify-content: center; */
   width: 100%;
   margin: 20px;
   font-size: 2em;
