@@ -145,6 +145,11 @@ const controller = ((budgetCtrl, uiCtrl) => {
   const setUpEventListeners = () => {
     const addItemButton = document.querySelector(uiCtrl.DOMStrings.addItem);
     addItemButton.addEventListener("click", addItem);
+    window.addEventListener("keypress", (event) => {
+      if (event.keyCode === 13) {
+        addItem();
+      }
+    });
     const main = document.querySelector(uiCtrl.DOMStrings.main);
     main.addEventListener("click", deleteItem);
   }
