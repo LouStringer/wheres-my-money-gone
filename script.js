@@ -39,12 +39,13 @@ const budgetController = (() => {
     }
   }
 
-  const calculateBudget = (type, value) => {
-    if (type === "inc") {
-      budgetData.totals.income += value;
-    } else {
-      budgetData.totals.expenses -= value;
-    }
+  const calculateBudget = () => {
+    budgetData.totals.income = budgetData.items.inc.reduce((total, item) => {
+      return total + item.value;
+    }, 0);
+    budgetData.totals.expenses = budgetData.items.exp.reduce((total, item) => {
+      return total - item.value;
+    }, 0);
     budgetData.totals.total = budgetData.totals.income + budgetData.totals.expenses;
   }
 
@@ -137,7 +138,7 @@ const controller = ((budgetCtrl, uiCtrl) => {
 
   const updateBudget = () => {
     // calculate new budget totals
-    budgetCtrl.calculateBudget(input.type, input.value);
+    budgetCtrl.calculateBudget();
     // update budget in UI:
     uiCtrl.updateBudgetUI(budgetCtrl.budgetData.totals.total, budgetCtrl.budgetData.totals.income, budgetCtrl.budgetData.totals.expenses);
   }
@@ -159,9 +160,18 @@ const controller = ((budgetCtrl, uiCtrl) => {
   }
 
   const deleteItem = (event) => {
+    let id, idType, idNumber, index;
     if (event.target.tagName === "BUTTON") {
-      document.querySelector(`#${event.target.parentNode.id}`).remove();
+      id = event.target.parentNode.id;
+      idType = id.slice(0,3);
+      idNumber = parseInt(id.match(/[0-9]/gi));
+      index = budgetCtrl.budgetData.items[idType].findIndex(item => {
+        item.id === idNumber;
+      })
+      budgetCtrl.budgetData.items[idType].splice(index, 1);
+      document.querySelector(`#${id}`).remove();
     }
+    updateBudget();
   }
 
   const init = () => {
