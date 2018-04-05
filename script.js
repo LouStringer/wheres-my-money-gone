@@ -65,6 +65,8 @@ const uiController = (() => {
     addType: ".addType",
     addDescription: ".addDescription",
     addValue: ".addValue",
+    addItem: ".addItem",
+    main: "main",
     incomeList: "ul.income",
     expensesList: "ul.expense",
   }
@@ -90,15 +92,16 @@ const uiController = (() => {
     document.querySelector(DOMStrings.expenses).innerText = `£${expenses}`;
   }
 
-  const addListItem = (type, description, value) => {
-    let html = '<li class="item %incexp%"><span>%description%</span><span class="value">£%value%</span><span class="delete">x</span></li>'
-    html = html.replace("%description%", description);
-    html = html.replace("%value%", value);
+  const addListItem = (obj, type) => {
+    let html = '<li class="item %incexp%" id="%incexp%-%id%"><span>%description%</span><span class="value">£%value%</span><button class="delete">x</button></li>'
+    html = html.replace("%id%", obj.id);
+    html = html.replace("%description%", obj.description);
+    html = html.replace("%value%", obj.value);
     if (type === "inc") {
-      html = html.replace("%incexp%", "income");
+      html = html.replace(/%incexp%/gi, "income");
       document.querySelector(DOMStrings.incomeList).insertAdjacentHTML("beforeend", html);
     } else {
-      html = html.replace("%incexp%", "expense");
+      html = html.replace(/%incexp%/gi, "expense");
       document.querySelector(DOMStrings.expensesList).insertAdjacentHTML("beforeend", html);
     }
   }
@@ -126,8 +129,10 @@ const controller = ((budgetCtrl, uiCtrl) => {
   let input, newItem;
 
   const setUpEventListeners = () => {
-    const addItemButton = document.querySelector(".addItem");
+    const addItemButton = document.querySelector(uiCtrl.DOMStrings.addItem);
     addItemButton.addEventListener("click", addItem);
+    const main = document.querySelector(uiCtrl.DOMStrings.main);
+    main.addEventListener("click", deleteItem);
   }
 
   const updateBudget = () => {
@@ -145,11 +150,17 @@ const controller = ((budgetCtrl, uiCtrl) => {
       // create new item
       newItem = budgetCtrl.createBudgetItem(input.type, input.description, input.value);
       // add item to relevant UL
-      uiCtrl.addListItem(input.type, input.description, input.value);
+      uiCtrl.addListItem(newItem.newItem, input.type);
       // update budget totals (also in UI)
       updateBudget();
       // clear input fields
       uiCtrl.clearFields();
+    }
+  }
+
+  const deleteItem = (event) => {
+    if (event.target.tagName === "BUTTON") {
+      document.querySelector(`#${event.target.parentNode.id}`).remove();
     }
   }
 
