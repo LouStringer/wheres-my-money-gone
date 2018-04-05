@@ -183,6 +183,7 @@ const controller = ((budgetCtrl, uiCtrl) => {
       id = event.target.parentNode.id;
       idType = id.slice(0,3);
       idNumber = parseInt(id.match(/[0-9]/gi));
+      //delete from data structure & UI, then update overall budget totals
       budgetCtrl.deleteBudgetItemData(idType, idNumber);
       uiCtrl.deleteListItem(id);
       updateBudget();

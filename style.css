@@ -95,7 +95,7 @@ p.expenses {
 }
 
 span.currentIncome, span.currentExpenses {
-  width: 50px;
+  min-width: 50px;
   margin-left: auto;
 }
 
